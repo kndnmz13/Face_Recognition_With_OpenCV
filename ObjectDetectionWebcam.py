@@ -1,14 +1,3 @@
-
-# coding: utf-8
-
-# # Object Detection Demo
-# Welcome to the object detection inference walkthrough!  This notebook will walk you step by step through the process of using a pre-trained model to detect objects in an image. Make sure to follow the [installation instructions](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/installation.md) before you start.
-
-# # Imports
-
-# In[1]:
-
-
 import numpy as np
 import os
 import six.moves.urllib as urllib
@@ -40,26 +29,12 @@ cap = cv2.VideoCapture(0)
 
 
 # ## Object detection imports
-# Here are the imports from the object detection module.
-
-# In[3]:
-
-
 from utils import label_map_util
 
 from utils import visualization_utils as vis_util
 
 
 # # Model preparation 
-
-# ## Variables
-# 
-# Any model exported using the `export_inference_graph.py` tool can be loaded here simply by changing `PATH_TO_CKPT` to point to a new .pb file.  
-# 
-# By default we use an "SSD with Mobilenet" model here. See the [detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md) for a list of other models that can be run out-of-the-box with varying speeds and accuracies.
-
-# In[4]:
-
 
 # What model to download.
 MODEL_NAME = 'faster_rcnn_resnet101_coco_2018_01_28'
@@ -74,12 +49,6 @@ PATH_TO_LABELS = os.path.join('data', 'mscoco_label_map.pbtxt')
 
 NUM_CLASSES = 90
 
-
-# ## Download Model
-
-# In[5]:
-
-
 opener = urllib.request.URLopener()
 opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
 tar_file = tarfile.open(MODEL_FILE)
@@ -90,9 +59,6 @@ for file in tar_file.getmembers():
 
 
 # ## Load a (frozen) Tensorflow model into memory.
-
-# In[6]:
-
 
 detection_graph = tf.Graph()
 with detection_graph.as_default():
@@ -106,8 +72,6 @@ with detection_graph.as_default():
 # ## Loading label map
 # Label maps map indices to category names, so that when our convolution network predicts `5`, we know that this corresponds to `airplane`.  Here we use internal utility functions, but anything that returns a dictionary mapping integers to appropriate string labels would be fine
 
-# In[7]:
-
 
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
 categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
@@ -116,9 +80,6 @@ category_index = label_map_util.create_category_index(categories)
 
 # ## Helper code
 
-# In[8]:
-
-
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
   return np.array(image.getdata()).reshape(
@@ -126,9 +87,6 @@ def load_image_into_numpy_array(image):
 
 
 # # Detection
-
-# In[9]:
-
 
 # For the sake of simplicity we will use only 2 images:
 # image1.jpg
@@ -139,9 +97,6 @@ TEST_IMAGE_PATHS = [ os.path.join(PATH_TO_TEST_IMAGES_DIR, 'image{}.jpg'.format(
 
 # Size, in inches, of the output images.
 IMAGE_SIZE = (12, 8)
-
-
-# In[10]:
 
 
 def run_inference_for_single_image(image, graph):
