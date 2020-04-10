@@ -4,7 +4,7 @@
 - activate tensorflow1
 
 ##LIBRARY##
-(tensorflow1) C:\> pip install tensorflow-gpu==1.13.2
+(tensorflow1) C:\> pip install tensorflow-gpu==1.13.2 <br/>
 (tensorflow1) C:\> conda install -c anaconda protobuf
 (tensorflow1) C:\> pip install pillow
 (tensorflow1) C:\> pip install lxml
